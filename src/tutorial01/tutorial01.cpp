@@ -4,6 +4,8 @@ using namespace std;
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
+#include "LoadShader.h"
+
 enum VAO_IDs {Triagnle, NumVAOs};
 enum Buffer_IDs {ArrayBuffer, NumBuffers};
 enum Attrib_IDs {vPosition = 0};
@@ -15,6 +17,8 @@ const GLuint NumVertices = 6;
 
 void init(void)
 {
+	glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
+
 	glGenVertexArrays(NumVAOs, VAOs);
 	glBindVertexArray(VAOs[Triagnle]);
 
@@ -30,17 +34,34 @@ void init(void)
 	glBindBuffer(GL_ARRAY_BUFFER, Buffers[ArrayBuffer]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+	ShaderInfo shaders[] = {
+		{GL_VERTEX_SHADER, "D:\\Work\\OpenGL\\trunk\\src\\tutorial01\\triangles.vert"},
+		{GL_FRAGMENT_SHADER, "D:\\Work\\OpenGL\\trunk\\src\\tutorial01\\triangles.frag"},
+		{GL_NONE, NULL}
+	};
+	GLuint program = LoadShader(shaders);
+	glValidateProgram(program);
+	glUseProgram(program);
+
+	glVertexAttribPointer(vPosition, 2, GL_FLOAT, GL_FALSE, 0, 0);
+	glEnableVertexAttribArray(vPosition);
 }
 
+void display(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
 
+	glBindVertexArray(VAOs[Triagnle]);
+	glDrawArrays(GL_TRIANGLES, 0, NumVertices);
 
+	glutSwapBuffers();
+}
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGBA);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 	glutInitWindowSize(512, 512);
-	glutInitContextProfile(GLUT_CORE_PROFILE);
     glutCreateWindow(argv[0]);
 
 	GLenum res = glewInit();
@@ -49,6 +70,11 @@ int main(int argc, char** argv)
 		cerr << "Failed to initialize GLEW ... exiting" << endl;
 		exit(EXIT_FAILURE);
     }
+	init();
+
+	glutDisplayFunc(display);
+	glutIdleFunc(display);
+
     glutMainLoop();
 
     return 0;

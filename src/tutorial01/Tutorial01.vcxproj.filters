@@ -9,10 +9,21 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="Shader Files">
+      <UniqueIdentifier>{b1caba5f-59da-4b40-a884-07dd8c288008}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="tutorial01.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="triangles.vert">
+      <Filter>Shader Files</Filter>
+    </None>
+    <None Include="triangles.frag">
+      <Filter>Shader Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

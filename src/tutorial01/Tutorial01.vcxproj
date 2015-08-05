@@ -13,6 +13,10 @@
   <ItemGroup>
     <ClCompile Include="tutorial01.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="triangles.frag" />
+    <None Include="triangles.vert" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{F1BEE0FD-A789-4029-9B94-F7027C34BEFA}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -61,7 +65,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)Include\assimp</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)src\Common;$(SolutionDir)Include\assimp</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
