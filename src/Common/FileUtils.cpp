@@ -1,5 +1,6 @@
 #include "FileUtils.h"
 #include "Windows.h"
+#include <iostream>
 
 void getRootPath(char* utf8Path, size_t size)
 {
@@ -9,6 +10,25 @@ void getRootPath(char* utf8Path, size_t size)
 	int nNum = WideCharToMultiByte(CP_UTF8, 0, utf16Path, -1, utf8Path, size, nullptr, nullptr);
 
 	convertPathFormatToUnixStyle(utf8Path);
+
+	std::string root(utf8Path);
+
+	std::string::size_type pos = root.find("Debug");
+	if (pos != std::string::npos)
+	{
+		for (int i = 0; i != 5; ++i)
+		{
+			*(utf8Path + pos + i) = '\0';
+		}
+	}
+	pos = root.find("Release");
+	if (pos != std::string::npos)
+	{
+		for (int i = 0; i != 7; ++i)
+		{
+			*(utf8Path + pos + i) = '\0';
+		}
+	}
 }
 
 void convertPathFormatToUnixStyle(char* path)
@@ -29,5 +49,5 @@ void getFullPath(const char* filePath, char* fullPath, size_t size)
 
 	getRootPath(path, sizeof(path));
 
-	sprintf_s(fullPath, size, "%s/%s", path, filePath);
+	sprintf_s(fullPath, size, "%s%s", path, filePath);
 }
