@@ -84,10 +84,12 @@
   <ItemGroup>
     <ClInclude Include="FileUtils.h" />
     <ClInclude Include="LoadShader.h" />
+    <ClInclude Include="Mat4.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileUtils.cpp" />
     <ClCompile Include="LoadShader.cpp" />
+    <ClCompile Include="Mat4.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
